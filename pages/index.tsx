@@ -33,11 +33,11 @@ export default function IndexPage() {
 
   return (
     <Layout>
-      <h1>NextAuth.js Example</h1>
+      {/* <h1>NextAuth.js Example</h1> */}
       <iframe
         src="https://stream.robocore.ai:5443/LiveApp/play.html?name=stream1&is360=true"
-        width="960"
-        height="540"
+        width="1800"
+        height="630"
       />
       <iframe src="http://18.166.70.71:8000/" width="480" height="270" />
       {/* <iframe
@@ -47,10 +47,10 @@ export default function IndexPage() {
         height="50%"
       />
       <iframe src="http://18.163.8.140:5000/" width="50%" height="30%" /> */}
-      <p>
+      {/* <p>
         This is an example site to demonstrate how to use{" "}
         <a href="https://next-auth.js.org">NextAuth.js</a> for authentication.
-      </p>
+      </p> */}
     </Layout>
   )
 }

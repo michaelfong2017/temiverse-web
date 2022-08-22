@@ -39,7 +39,20 @@ export default function IndexPage() {
         width="1800"
         height="630"
       />
-      <iframe src="http://18.166.70.71:8000/" width="480" height="270" />
+      <div className="iframe-container">
+        <iframe
+          src="https://stream.robocore.ai:5443/WebRTCAppEE/play.html?name=self1"
+          width="560"
+          height="315"
+        ></iframe>
+        <iframe
+          src="https://stream.robocore.ai:5443/WebRTCAppEE/play.html?name=temi1"
+          width="560"
+          height="315"
+        ></iframe>
+        <iframe className="temi-control" src="http://18.166.70.71:8000/" width="480" height="270" />
+      </div>
+
       {/* <iframe
         ref={vr}
         src="http://18.163.8.140:8081/index.html"

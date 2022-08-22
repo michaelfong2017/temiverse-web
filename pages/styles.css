@@ -42,3 +42,13 @@ iframe {
   border-radius: 0.5rem;
   /* filter: invert(1); */
 }
+
+.temi-control {
+  padding: 1.4rem;
+}
+
+.iframe-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start
+}

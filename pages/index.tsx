@@ -41,12 +41,12 @@ export default function IndexPage() {
       />
       <div className="iframe-container">
         <iframe
-          src="https://stream.robocore.ai:5443/WebRTCAppEE/play.html?name=self1"
+          src="https://stream.robocore.ai:5443/WebRTCAppEE/play.html?name=room1Merged"
           width="560"
           height="315"
         ></iframe>
         <iframe
-          src="https://stream.robocore.ai:5443/WebRTCAppEE/play.html?name=temi1"
+          src="https://stream.robocore.ai:5443/LiveApp/play.html?name=temi1"
           width="560"
           height="315"
         ></iframe>

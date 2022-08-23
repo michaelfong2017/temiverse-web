@@ -50,7 +50,7 @@ export default function IndexPage() {
           width="560"
           height="315"
         ></iframe>
-        <iframe className="temi-control" src="http://18.163.183.88:8000/" width="480" height="270" />
+        <iframe className="temi-control" src="http://18.167.120.30:8000/" width="480" height="270" />
       </div>
 
       {/* <iframe

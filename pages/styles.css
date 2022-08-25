@@ -44,10 +44,10 @@ iframe {
 }
 
 .temi-control {
-  padding: 1.4rem;
+  padding: 0.95rem;
 }
 
-.iframe-container {
+.row-container {
   display: flex;
   flex-direction: row;
   align-items: flex-start

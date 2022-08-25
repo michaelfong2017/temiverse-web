@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import Layout from "../components/layout"
+import MediaViewer from "../components/media-viewer"
 
 const useWidth = () => {
   const [width, setWidth] = useState(0) // default width
@@ -61,12 +62,13 @@ export default function IndexPage() {
           ></iframe>
         </div>
 
-        <div>
+        {/* <div>
           <iframe
             width="850"
             height="590"
           />
-        </div>
+        </div> */}
+        <MediaViewer />
       </div>
 
       {/* <iframe

@@ -14,6 +14,7 @@
   "author": "michaelfong2017 <michaelfong2017@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@nextui-org/react": "^1.0.0-beta.10",
     "@types/formidable": "^2.0.5",
     "babel-plugin-superjson-next": "^0.4.3",
     "formidable": "^2.0.1",

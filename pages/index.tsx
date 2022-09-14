@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import Layout from "../components/layout"
 import MediaViewer from "../components/media-viewer"
+import { PathLike, promises as fs } from "fs"
+import path from "path"
 
 const useWidth = () => {
   const [width, setWidth] = useState(0) // default width
@@ -22,7 +24,7 @@ const useHeight = () => {
   return height
 }
 
-export default function IndexPage() {
+export default function IndexPage({ boothFiles }: { boothFiles: any }) {
   const vr = useRef<HTMLIFrameElement>(null)
 
   const windowWidth = useWidth()
@@ -68,7 +70,7 @@ export default function IndexPage() {
             height="590"
           />
         </div> */}
-        <MediaViewer />
+        <MediaViewer boothFiles={boothFiles} />
       </div>
 
       {/* <iframe
@@ -84,4 +86,58 @@ export default function IndexPage() {
       </p> */}
     </Layout>
   )
+}
+
+export async function getServerSideProps() {
+  const mediaDirectory = path.join(process.cwd(), "public", "media")
+
+  const fileExists = async (path: PathLike) =>
+    !!(await fs.stat(path).catch((e) => false))
+
+  if (!(await fileExists(mediaDirectory))) {
+    await fs.mkdir(mediaDirectory)
+  }
+
+  const dirents = await fs.readdir(mediaDirectory, { withFileTypes: true })
+  const boothDirNames = dirents
+    .map((dirent) => {
+      if (
+        dirent.isDirectory() &&
+        dirent.name.toLowerCase().startsWith("booth")
+      ) {
+        return dirent.name
+      }
+    })
+    .filter((dir) => dir !== undefined)
+
+  const boothFiles = await Promise.all(
+    boothDirNames.map(async (boothDirName) => {
+      if (boothDirName !== undefined) {
+        const boothDirPath = path.join(mediaDirectory, boothDirName)
+
+        const boothFilenames = await fs.readdir(boothDirPath)
+
+        const boothFilepaths = boothFilenames.map((boothFilename) => {
+          return path.join(boothDirPath, boothFilename)
+        })
+        // const fileContents = await fs.readFile(path.join(boothDirPath, boothDirFiles[0]), "utf8")
+
+        const forwardSlashFilepaths = boothFilepaths.map((filepath) => {
+          return "/media" + filepath.replace(/\\/g, "/").split("/media")[1]
+        })
+
+        return {
+          filepaths: forwardSlashFilepaths,
+        }
+      }
+    })
+  )
+
+  // // By returning { props: { posts } }, the Blog component
+  // // will receive `posts` as a prop at build time
+  return {
+    props: {
+      boothFiles,
+    },
+  }
 }

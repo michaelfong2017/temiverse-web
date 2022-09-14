@@ -1,28 +1,68 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import path from "path"
 import { PathLike, promises as fs } from "fs"
+import formidable, { File } from "formidable"
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
+type ProcessedFiles = Array<[string, File]>
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const mediaDirectory = path.join(process.cwd(), "public", "media")
+  let status = 200,
+    resultBody = { status: "ok", message: "Files were uploaded successfully" }
 
-  const fileExists = async (path: PathLike) =>
-    !!(await fs.stat(path).catch((e) => false))
+  let booth = "-1"
+  const files = await new Promise<ProcessedFiles | undefined>(
+    (resolve, reject) => {
+      const form = new formidable.IncomingForm()
+      const files: ProcessedFiles = []
 
-  const jsonPath = path.join(mediaDirectory, "/directory.json")
+      form.on("field", function (name, field) {
+        // console.log("Got a field:", field)
+        // console.log("Got a field name:", name)
+        if (name == "booth") {
+          booth = field
+        }
+      })
 
-  if (!(await fileExists(mediaDirectory))) {
-    await fs.mkdir(mediaDirectory)
-  }
+      form.on("file", function (field, file) {
+        files.push([field, file])
+      })
 
-  if (!(await fileExists(jsonPath))) {
-    await fs.writeFile(jsonPath, JSON.stringify({ file_count: 0 }, null, 4))
-  }
-
-  const fileContents = await fs.readFile(jsonPath, "utf8")
-
-  console.log(fileContents)
-
-  res.send({
-    content: "OK",
+      form.on("end", () => resolve(files))
+      form.on("error", (err) => reject(err))
+      form.parse(req, () => {
+        //
+      })
+    }
+  ).catch((e) => {
+    console.log(e)
+    status = 500
+    resultBody = {
+      status: "fail",
+      message: "Upload error",
+    }
   })
+
+  if (files?.length) {
+    /* Create directory for uploads */
+    const targetPath = path.join(process.cwd(), "public", "media", "booth_" + booth)
+    try {
+      await fs.access(targetPath)
+    } catch (e) {
+      await fs.mkdir(targetPath)
+    }
+
+    /* Move uploaded files to directory */
+    for (const file of files) {
+      const tempPath = file[1].filepath
+      await fs.rename(tempPath, path.join(targetPath, file[1].originalFilename!))
+    }
+  }
+
+  res.status(status).json(resultBody)
 }

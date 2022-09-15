@@ -3,7 +3,8 @@ import Image from "next/image";
 import FilePreview from "./FilePreview";
 import styles from "../styles/DropZone.module.css";
 
-const DropZone = ({ data, dispatch }) => {
+const DropZone = ({ data, dispatch, booth }) => {
+  console.log(booth)
   // onDragEnter sets inDropZone to true
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -79,7 +80,7 @@ const DropZone = ({ data, dispatch }) => {
     // loop over files and add to formData
     files.forEach((file) => formData.append("files", file));
 
-    formData.append("booth", "1");
+    formData.append("booth", booth);
 
     // Upload the files as a POST request to the server using fetch
     // Note: /api/fileupload is not a real endpoint, it is just an example

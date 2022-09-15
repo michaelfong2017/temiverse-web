@@ -56,12 +56,17 @@ iframe {
 /***/
 .image-viewer{
   margin: 20px;
-  width: 850px;
+  width: 400px;
+  height: 720px;
 }
 .carousel-container {
   margin: 0px -24px;
   padding: 0px 22px;
   overflow: hidden;
+}
+.react-player {
+  padding-top: 160px;
+  position: relative;
 }
 .external-buttons {
   overflow: visible;

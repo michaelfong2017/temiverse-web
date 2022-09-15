@@ -37,41 +37,41 @@ export default function IndexPage({ boothFiles }: { boothFiles: any }) {
   return (
     <Layout>
       {/* <h1>NextAuth.js Example</h1> */}
-      <iframe
-        src="https://stream.robocore.ai:5443/LiveApp/play.html?name=stream1&is360=true"
-        width="1800"
-        height="630"
-      />
       <div className="row-container">
-        <div>
-          <div className="row-container">
-            <iframe
-              className="temi-control"
-              src="http://18.167.120.30:8000/"
-              width="480"
-              height="270"
-            />
-            <iframe
-              src="https://stream.robocore.ai:5443/LiveApp/play.html?name=temi1"
-              width="400"
-              height="300"
-            ></iframe>
-          </div>
+        <iframe
+          src="https://stream.robocore.ai:5443/LiveApp/play.html?name=stream1&is360=true"
+          width="1400"
+          height="740"
+        />
+        <MediaViewer boothFiles={boothFiles} />
+      </div>
+      <div>
+        <div className="row-container">
+          <iframe
+            className="temi-control"
+            src="http://18.167.120.30:8000/"
+            width="480"
+            height="270"
+          />
+          <iframe
+            src="https://stream.robocore.ai:5443/LiveApp/play.html?name=temi1"
+            width="400"
+            height="300"
+          ></iframe>
           <iframe
             src="https://stream.robocore.ai:5443/WebRTCAppEE/play.html?name=room1Merged"
-            width="930"
-            height="270"
+            width="900"
+            height="300"
           ></iframe>
         </div>
+      </div>
 
-        {/* <div>
+      {/* <div>
           <iframe
             width="850"
             height="590"
           />
         </div> */}
-        <MediaViewer boothFiles={boothFiles} />
-      </div>
 
       {/* <iframe
         ref={vr}

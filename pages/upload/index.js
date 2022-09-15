@@ -59,14 +59,12 @@ export default function Upload() {
             <Dropdown.Item key="1">1</Dropdown.Item>
             <Dropdown.Item key="2">2</Dropdown.Item>
             <Dropdown.Item key="3">3</Dropdown.Item>
-            <Dropdown.Item key="4">4</Dropdown.Item>
-            <Dropdown.Item key="5">5</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
         <br />
         {/* Pass state data and dispatch to the DropZone component */}
-        <DropZone data={data} dispatch={dispatch} />
+        <DropZone data={data} dispatch={dispatch} booth={selectedValue} />
       </main>
 
       <footer className={styles.footer}>

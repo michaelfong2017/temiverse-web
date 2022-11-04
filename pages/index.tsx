@@ -49,7 +49,7 @@ export default function IndexPage({ boothFiles }: { boothFiles: any }) {
         <div className="row-container">
           <iframe
             className="temi-control"
-            src="http://18.167.120.30:8000/"
+            src="http://16.163.180.160:8000/"
             width="480"
             height="270"
           />

@@ -49,6 +49,9 @@ tmux new -s temiverse-web
 Inside tmux,
 ```
 cd temiverse-web
+
+yarn install
+
 yarn dev
 ```
 
